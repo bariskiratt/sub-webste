@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Farewell Note</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url("nyan-cat.gif") repeat;
+        }
+        .login-container, #mainSite {
+            display: none;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            padding: 20px;
+            width: 550px;
+            flex-direction: column;
+            align-items: center;
+        }
+        #mainSite {
+            padding: 0;
+        }
+        .login-logo, .login-input, .login-button {
+            margin-bottom: 10px;
+        }
+        .login-logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #262626;
+            margin-bottom: 20px;
+        }
+        .login-input, .login-button {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+        }
+        .login-input {
+            font-size: 14px;
+        }
+        .login-button {
+            background-color: #0095f6;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .login-button:disabled {
+            opacity: 0.3;
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s ease-in-out; 
+        }
+        
+        .image-container:hover {
+            transform: scale(1.2);
+        }
+        
+        .image-container:hover .image-text {
+            visibility: visible;
+        }
+        
+        .image-text {
+            visibility: hidden;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: black;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .enlarged-image {
+            width: 100%;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.querySelector('form');
+            var showPasswordButton = document.querySelector('#show-password');
+
+            form.addEventListener('submit', validateForm);
+            showPasswordButton.addEventListener('click', showPassword);
+
+            document.getElementById('login-container').style.display = 'flex';
+        });
+
+        function validateForm(e) {
+            e.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            if (username === '' || password === '') {
+                alert('Please fill in both fields');
+            }
+            else if (username === 'darthewok' && password === 'andrewthebumpkin') {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('mainSite').style.display = 'flex';
+                playSound('background_sound.mp3');
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        function showPassword() {
+            var passwordField = document.getElementById('password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        function playSound(src) {
+            var audio = new Audio(src);
+            audio.loop = true;
+            audio.play();
+        }
+    </script>
+</head>
+<body>
+    <div id="login-container" class="login-container">
+        <div class="login-logo">Log In</div>
+        <form>
+            <input type="text" id="username" class="login-input" placeholder="darthewok">
+            <input type="password" id="password" class="login-input" placeholder="andrewthebumpkin">
+            <button type="submit" class="login-button">Enter</button>
+            <button type="button" id="show-password">Show Password</button>
+        </form>
+    </div>
+    <div id="mainSite" class="login-container">
+        <a href="https://youtu.be/LjTmZcZc7NI">
+            <img src="masta.png" alt="To my farewell message" class="enlarged-image">
+        </a>
+    </div>
+</body>
+</html>
